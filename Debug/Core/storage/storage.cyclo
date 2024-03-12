@@ -1,0 +1,8 @@
+../Core/storage/storage.c:25:5:littlefs_read	2
+../Core/storage/storage.c:32:5:littlefs_prog	1
+../Core/storage/storage.c:39:5:littlefs_erase	1
+../Core/storage/storage.c:46:5:littlefs_sync	1
+../Core/storage/storage.c:70:12:mount	3
+../Core/storage/storage.c:90:5:storage_init	7
+../Core/storage/storage.c:137:12:set_info	19
+../Core/storage/storage.c:239:12:get_info	16

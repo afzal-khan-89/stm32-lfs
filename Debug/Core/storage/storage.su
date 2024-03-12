@@ -1,0 +1,8 @@
+../Core/storage/storage.c:25:5:littlefs_read	24	static
+../Core/storage/storage.c:32:5:littlefs_prog	24	static
+../Core/storage/storage.c:39:5:littlefs_erase	16	static
+../Core/storage/storage.c:46:5:littlefs_sync	16	static
+../Core/storage/storage.c:70:12:mount	16	static
+../Core/storage/storage.c:90:5:storage_init	152	static
+../Core/storage/storage.c:137:12:set_info	720	static
+../Core/storage/storage.c:239:12:get_info	480	static

@@ -1,0 +1,6 @@
+../Core/littlefs/bd/lfs_filebd.c:18:5:lfs_filebd_create	2
+../Core/littlefs/bd/lfs_filebd.c:52:5:lfs_filebd_destroy	2
+../Core/littlefs/bd/lfs_filebd.c:65:5:lfs_filebd_read	3
+../Core/littlefs/bd/lfs_filebd.c:101:5:lfs_filebd_prog	3
+../Core/littlefs/bd/lfs_filebd.c:134:5:lfs_filebd_erase	1
+../Core/littlefs/bd/lfs_filebd.c:149:5:lfs_filebd_sync	2
