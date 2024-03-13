@@ -10,10 +10,10 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include Drivers/STM32F1xx_HAL_Driver/Src/subdir.mk
+-include Core/storage/spif/src/subdir.mk
+-include Core/storage/littlefs/bd/subdir.mk
+-include Core/storage/littlefs/subdir.mk
 -include Core/storage/subdir.mk
--include Core/spif/src/subdir.mk
--include Core/littlefs/bd/subdir.mk
--include Core/littlefs/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
 -include objects.mk

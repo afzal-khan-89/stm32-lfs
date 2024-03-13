@@ -24,9 +24,9 @@ Core/storage/storage.o: ../Core/storage/storage.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
- /home/afzal/STM32CubeIDE/ws/Lfs_103/Core/spif/inc/spif.h \
- /home/afzal/STM32CubeIDE/ws/Lfs_103/Core/littlefs/lfs.h \
- /home/afzal/STM32CubeIDE/ws/Lfs_103/Core/littlefs/lfs_util.h
+ /home/afzal/STM32CubeIDE/ws/Lfs_103/Core/storage/spif/inc/spif.h \
+ /home/afzal/STM32CubeIDE/ws/Lfs_103/Core/storage/littlefs/lfs.h \
+ /home/afzal/STM32CubeIDE/ws/Lfs_103/Core/storage/littlefs/lfs_util.h
 ../Core/storage/storage.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
@@ -53,6 +53,6 @@ Core/storage/storage.o: ../Core/storage/storage.c \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
-/home/afzal/STM32CubeIDE/ws/Lfs_103/Core/spif/inc/spif.h:
-/home/afzal/STM32CubeIDE/ws/Lfs_103/Core/littlefs/lfs.h:
-/home/afzal/STM32CubeIDE/ws/Lfs_103/Core/littlefs/lfs_util.h:
+/home/afzal/STM32CubeIDE/ws/Lfs_103/Core/storage/spif/inc/spif.h:
+/home/afzal/STM32CubeIDE/ws/Lfs_103/Core/storage/littlefs/lfs.h:
+/home/afzal/STM32CubeIDE/ws/Lfs_103/Core/storage/littlefs/lfs_util.h:

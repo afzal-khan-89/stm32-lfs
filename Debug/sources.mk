@@ -24,9 +24,9 @@ C_DEPS :=
 SUBDIRS := \
 Core/Src \
 Core/Startup \
-Core/littlefs/bd \
-Core/littlefs \
-Core/spif/src \
+Core/storage/littlefs/bd \
+Core/storage/littlefs \
+Core/storage/spif/src \
 Core/storage \
 Drivers/STM32F1xx_HAL_Driver/Src \
 

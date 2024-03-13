@@ -1,8 +1,0 @@
-/home/afzal/STM32CubeIDE/ws/Lfs_103/Core/littlefs/lfs_util.h:227:21:lfs_malloc	16	static
-/home/afzal/STM32CubeIDE/ws/Lfs_103/Core/littlefs/lfs_util.h:239:20:lfs_free	16	static
-../Core/littlefs/bd/lfs_rambd.c:10:5:lfs_rambd_create	24	static
-../Core/littlefs/bd/lfs_rambd.c:44:5:lfs_rambd_destroy	24	static
-../Core/littlefs/bd/lfs_rambd.c:55:5:lfs_rambd_read	32	static
-../Core/littlefs/bd/lfs_rambd.c:75:5:lfs_rambd_prog	32	static
-../Core/littlefs/bd/lfs_rambd.c:95:5:lfs_rambd_erase	24	static
-../Core/littlefs/bd/lfs_rambd.c:110:5:lfs_rambd_sync	16	static

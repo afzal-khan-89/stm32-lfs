@@ -112,13 +112,6 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
 
-
- // W25QXX_HandleTypeDef w25qxx;
- // W25QXX_result_t res;
-
-
-
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -131,20 +124,25 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	  Storage _storage = {
-			  .spi =  &hspi1 ,
-			  .gpio = GPIOB ,
+			  .spi_handle =  &hspi1 ,
+			  .gpio_handle = GPIOB ,
 			  .pin = GPIO_PIN_0
 	  };
 
 	  int err = storage_init(&_storage) ;
-	  if(err ==0)
+	  if(err != 0)
 	  {
-		  _storage.kv_set(version_info, "0.0.01");
+		  printf("main :: storage init fail \n");
 	  }
+	  _storage.kv_set(version_info, "0.0.01");
+	  _storage.push("hello world", 11);
 
+	  char lb[48];
+	  memset(lb, 0, sizeof(lb));
+	  _storage.pop(lb, 11);
 	  while(1)
 	  {
-		  printf("main loop \n");
+		  printf("read lfs %s \n", lb);
 		  HAL_Delay(1000);
 	  }
   }
