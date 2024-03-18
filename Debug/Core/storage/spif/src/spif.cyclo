@@ -13,9 +13,9 @@
 ../Core/storage/spif/src/spif.c:336:6:SPIF_WriteReg2	3
 ../Core/storage/spif/src/spif.c:366:6:SPIF_WriteReg3	3
 ../Core/storage/spif/src/spif.c:396:6:SPIF_WaitForWriting	3
-../Core/storage/spif/src/spif.c:419:6:SPIF_FindChip	37
-../Core/storage/spif/src/spif.c:562:6:SPIF_WriteFn	12
-../Core/storage/spif/src/spif.c:650:6:SPIF_ReadFn	7
+../Core/storage/spif/src/spif.c:419:6:SPIF_FindChip	28
+../Core/storage/spif/src/spif.c:562:6:SPIF_WriteFn	11
+../Core/storage/spif/src/spif.c:650:6:SPIF_ReadFn	6
 ../Core/storage/spif/src/spif.c:716:6:SPIF_Init	8
 ../Core/storage/spif/src/spif.c:755:6:SPIF_EraseChip	4
 ../Core/storage/spif/src/spif.c:792:6:SPIF_EraseSector	7

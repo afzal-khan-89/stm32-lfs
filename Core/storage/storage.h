@@ -3,6 +3,7 @@
 
 #include "main.h"
 
+
 /* Total string 21846 */
 
 typedef enum{
@@ -17,22 +18,24 @@ typedef enum{
 
 typedef enum {
 	STORAGE_OK = 0 ,
-	STORAGE_MOUNT_FAIL = -1 ,
-	STORAGE_FILE_OPEN_FAIL = -2,
-	STORAGE_WRITE_FAIL = -3,
-	STORAGE_FLASH_ERROR = -4
+	STORATE_FULL = -1 ,
+	STORATE_EMPTY = -2,
+	STORAGE_MOUNT_FAIL = -3 ,
+	STORAGE_FILE_OPEN_FAIL = -4,
+	STORAGE_WRITE_FAIL = -5,
+	STORAGE_FLASH_ERROR = -6
 }storage_error_t;
 
 typedef struct{
 
 	char version[16];
-	char folder_max_count[3];
-	char file_max_count[5];
+	uint16_t folder_max_count;
+	uint16_t file_max_count;
 
-	char r_folder_seek[3];
-	char w_folder_seek[3];
-	char r_file_seek[5];
-	char w_file_seek[5];
+	uint16_t r_folder_seek;
+	uint16_t w_folder_seek;
+	uint16_t r_file_seek;
+	uint16_t w_file_seek;
 
 }Info_storate_t;
 
@@ -42,17 +45,52 @@ typedef struct{
 	GPIO_TypeDef *gpio_handle ;
 	uint16_t pin;
 
-	Info_storate_t info ;
-
 	int(*kv_set)(info_keys_t, char*);
 	int(*kv_get)(info_keys_t, char*);
-	storate_error_t(*push)(uint8_t *, int);
-	storate_error_t(*pop)(uint8_t *, int);
 
-} Storage ;
+	storage_error_t(*push)(uint8_t *, int);
+	storage_error_t(*pop)(uint8_t *, int);
 
-extern storate_error_t storage_init(Storage * _storage);
-extern storate_error_t storate_reset();
+} Storage_t ;
+
+extern storage_error_t storage_init(Storage_t * _storage);
+extern storage_error_t storate_reset();
 
 
 #endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

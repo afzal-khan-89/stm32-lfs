@@ -123,7 +123,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  Storage _storage = {
+	  Storage_t _storage = {
 			  .spi_handle =  &hspi1 ,
 			  .gpio_handle = GPIOB ,
 			  .pin = GPIO_PIN_0
@@ -134,12 +134,17 @@ int main(void)
 	  {
 		  printf("main :: storage init fail \n");
 	  }
-	  _storage.kv_set(version_info, "0.0.01");
-	  _storage.push("hello world", 11);
-
+//	  _storage.kv_set(version_info, "0.0.01");
 	  char lb[48];
-	  memset(lb, 0, sizeof(lb));
-	  _storage.pop(lb, 11);
+	  for(int i=0 ; i<10; i++)
+	  {
+		  memset(lb, 0, sizeof(lb));
+		  itoa(i, lb, 10);
+		  strcat(lb, ": test data \n") ;
+		 _storage.push(lb, 15);
+	  }
+
+	  //_storage.pop(lb, 15);
 	  while(1)
 	  {
 		  printf("read lfs %s \n", lb);
@@ -211,7 +216,7 @@ static void MX_SPI1_Init(void)
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
