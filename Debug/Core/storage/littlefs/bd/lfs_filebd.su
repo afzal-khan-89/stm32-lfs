@@ -1,0 +1,6 @@
+../Core/storage/littlefs/bd/lfs_filebd.c:18:5:lfs_filebd_create	32	static
+../Core/storage/littlefs/bd/lfs_filebd.c:52:5:lfs_filebd_destroy	24	static
+../Core/storage/littlefs/bd/lfs_filebd.c:65:5:lfs_filebd_read	48	static
+../Core/storage/littlefs/bd/lfs_filebd.c:101:5:lfs_filebd_prog	48	static
+../Core/storage/littlefs/bd/lfs_filebd.c:134:5:lfs_filebd_erase	24	static
+../Core/storage/littlefs/bd/lfs_filebd.c:149:5:lfs_filebd_sync	24	static

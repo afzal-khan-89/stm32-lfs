@@ -1,0 +1,17 @@
+../Core/storage/local_storage.c:113:5:lfs_read	2
+../Core/storage/local_storage.c:119:5:lfs_write	1
+../Core/storage/local_storage.c:125:5:lfs_erase	1
+../Core/storage/local_storage.c:131:5:lfs_sync	1
+../Core/storage/local_storage.c:160:17:init_storage	12
+../Core/storage/local_storage.c:272:12:get_storage_instance	2
+../Core/storage/local_storage.c:277:12:mount	2
+../Core/storage/local_storage.c:293:17:storate_reset	2
+../Core/storage/local_storage.c:308:12:get_store_info	22
+../Core/storage/local_storage.c:415:12:set_store_info	11
+../Core/storage/local_storage.c:485:24:save_data	10
+../Core/storage/local_storage.c:570:24:read_data	9
+../Core/storage/local_storage.c:654:10:get_firmware_info	22
+../Core/storage/local_storage.c:767:9:set_firmware_info	10
+../Core/storage/local_storage.c:834:12:firmware_write	3
+../Core/storage/local_storage.c:869:12:firmware_read	3
+../Core/storage/local_storage.c:904:24:firmware_delete_dir	1
