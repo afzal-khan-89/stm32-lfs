@@ -12,6 +12,6 @@
 ../Core/storage/local_storage.c:570:24:read_data	9
 ../Core/storage/local_storage.c:654:10:get_firmware_info	22
 ../Core/storage/local_storage.c:767:9:set_firmware_info	10
-../Core/storage/local_storage.c:834:12:firmware_write	3
-../Core/storage/local_storage.c:869:12:firmware_read	3
-../Core/storage/local_storage.c:904:24:firmware_delete_dir	1
+../Core/storage/local_storage.c:834:12:firmware_write	4
+../Core/storage/local_storage.c:879:12:firmware_read	4
+../Core/storage/local_storage.c:926:24:remove_firmware	2

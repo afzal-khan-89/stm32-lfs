@@ -40,9 +40,9 @@ static int set_store_info();
 static Storage_error_t save_data(uint8_t* , uint16_t );
 static Storage_error_t read_data(uint8_t* , uint16_t );
 
-static int firmware_write(uint8_t *, uint16_t , uint32_t );
+static int firmware_write(uint8_t *, uint16_t  );
 static int firmware_read(uint8_t *, uint16_t , uint32_t );
-static Storage_error_t firmware_delete_dir();
+static Storage_error_t  remove_firmware();
 
 
 
@@ -79,13 +79,13 @@ typedef struct{
 }Info_storate_t;
 
 
-
-
-
 lfs_t littlefs;
 static Storage_t _storage ;
 static Info_storate_t _info_storage ;
 static int is_initialized = 0 ;
+
+
+
 
 
 #if defined(FLASH_CHEAP_W25Q16)
@@ -276,7 +276,7 @@ Storage_t* get_storage_instance()
 
 static int mount() {
 	int err = 0 ;
- //   lfs_format(&littlefs, &littlefs_config);
+    lfs_format(&littlefs, &littlefs_config);
 	err = lfs_mount(&littlefs, &littlefs_config);
 	if(err < 0)
 	{
@@ -759,7 +759,7 @@ uint8_t  get_firmware_info(Info_firmware_t * _firmware)
 	{
 		_firmware->read = firmware_read;
 		_firmware->write = firmware_write;
-		_firmware->remove = firmware_delete_dir ;
+		_firmware->remove = remove_firmware ;
 	}
 	return success ;
 }
@@ -831,7 +831,7 @@ uint8_t set_firmware_info(Info_firmware_t * _firmware)
     return success ;
 }
 
-static int firmware_write(uint8_t *buff, uint16_t size, uint32_t seek)
+static int firmware_write(uint8_t *buff, uint16_t size)
 {
 	  lfs_file_t file ;
 	  int write_size = -1 ;
@@ -839,28 +839,38 @@ static int firmware_write(uint8_t *buff, uint16_t size, uint32_t seek)
 
 	  memset(firmware_path, 0, sizeof(firmware_path));
 
-	  strcpy(firmware_path, FIRMWARE_DIR_NAME); strcat(firmware_path, FIRMWARE_FILE_NAME);
+	  strcpy(firmware_path, FIRMWARE_DIR_NAME);  strcat(firmware_path, "/"); strcat(firmware_path, FIRMWARE_FILE_NAME);
 
-	  if( lfs_file_open( &littlefs, &file, firmware_path, LFS_O_RDWR )  < 0 )
+	  if( lfs_file_open( &littlefs, &file, firmware_path, LFS_O_RDWR | LFS_O_CREAT)  < 0 )
 	  {
 #ifdef DEBUG
-		  printf("firmware_read :fail to open firmware dir %s \n", firmware_path); while(1);
+		  printf("firmware_write :fail to open firmware dir %s \n", firmware_path); while(1);
 #endif
 	  }
 	  else
 	  {
-		  write_size = lfs_file_write(&littlefs, &file, firmware_path, size) ;
-		  if(write_size < 0)
+		  if(lfs_file_seek(&littlefs, &file, 0, LFS_SEEK_END) < 0)
 		  {
+
 #ifdef DEBUG
-			  printf("firmware_write :  fail to write firmware at seek %lu seek \n", seek); while(1);
+			  printf("firmware_write : fail to set seek end to write \n"); while(1);
 #endif
 		  }
 		  else
 		  {
+			  write_size = lfs_file_write(&littlefs, &file, buff, size) ;
+			  if(write_size < 0)
+			  {
 #ifdef DEBUG
-			  printf("firmware_read : successfully write %d byte at dir %s   \n", write_size, firmware_path);
+				  printf("firmware_write :  fail to write firmware .%d byte.\n", size); while(1);
 #endif
+			  }
+			  else
+			  {
+#ifdef DEBUG
+				  printf("firmware_write : successfully write %d byte at dir %s   \n", write_size, firmware_path);
+#endif
+			  }
 		  }
 		  lfs_file_close(&littlefs, &file);
 	  }
@@ -874,7 +884,7 @@ static int firmware_read(uint8_t *buff, uint16_t size, uint32_t seek)
 
 	  memset(firmware_path, 0, sizeof(firmware_path));
 
-	  strcpy(firmware_path, FIRMWARE_DIR_NAME); strcat(firmware_path, FIRMWARE_FILE_NAME);
+	  strcpy(firmware_path, FIRMWARE_DIR_NAME); 	strcat(firmware_path, "/");	strcat(firmware_path, FIRMWARE_FILE_NAME);
 
 	  if( lfs_file_open( &littlefs, &file, firmware_path, LFS_O_RDWR )  < 0 )
 	  {
@@ -884,26 +894,50 @@ static int firmware_read(uint8_t *buff, uint16_t size, uint32_t seek)
 	  }
 	  else
 	  {
-		  read_size = lfs_file_read(&littlefs, &file, buff, size) ;
-		  if(read_size < 0 )
+		  if(lfs_file_seek(&littlefs, &file, seek, LFS_SEEK_SET) <  0)
 		  {
+
 #ifdef DEBUG
-			  printf("firmware_read : fail to read firmware at seek %lu \n", seek); while(1);
+			  printf("firmware_read : fail to set seek  at %lu  \n", seek); while(1);
 #endif
 		  }
 		  else
 		  {
+			  read_size = lfs_file_read(&littlefs, &file, buff, size) ;
+			  if(read_size < 0 )
+			  {
 #ifdef DEBUG
-			  printf("firmware_read : successfully read from %s   \n", firmware_path);
+				  printf("firmware_read : fail to read firmware at seek %lu \n", seek); while(1);
 #endif
+			  }
+			  else
+			  {
+#ifdef DEBUG
+				  //printf("firmware_read : successfully read at seek %lu  \n", seek);
+#endif
+			  }
 		  }
+
 		  lfs_file_close(&littlefs, &file);
 	  }
 	  return read_size ;
 }
-static Storage_error_t firmware_delete_dir()
+
+static Storage_error_t remove_firmware()
 {
-	return STORAGE_OK ;
+	  char firmware_path[64];
+
+	  Storage_error_t err = STORAGE_OK ;
+
+	  memset(firmware_path, 0, sizeof(firmware_path));
+
+	  strcpy(firmware_path, FIRMWARE_DIR_NAME); 	strcat(firmware_path, "/");	strcat(firmware_path, FIRMWARE_FILE_NAME);
+	  if(lfs_remove(&littlefs , firmware_path) < 0)
+	  {
+		  printf("fail to remove file %s", firmware_path); while(1);
+		  err = STORAGE_REMOVE_FAIL ;
+	  }
+	  return err ;
 }
 
 

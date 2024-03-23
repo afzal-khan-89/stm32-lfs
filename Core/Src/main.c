@@ -86,6 +86,7 @@ int _write(int file, char *ptr, int len)
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+	char file_to_write_test[43]="a quick brown fox jumps over the lazy dog \n" ;
 
   /* USER CODE END 1 */
 
@@ -122,22 +123,22 @@ int main(void)
   {
 	  printf("main : fail to initialize local storage \n");	while(1);
   }
-  Storage_t * _storage = get_storage_instance();
-  if(_storage == NULL)
-  {
-	  printf("local storage instance null \n "); while(1);
-  }
-  char lb[48];
-  for(int i=0 ; i<28; i++)
-  {
-  		  memset(lb, 0, sizeof(lb));
-//  		  itoa(i, lb, 10);
-//  		  strcat(lb, " : location data \n") ;
-//  		 _storage->push(lb, 19);
-		  _storage->pop(lb, 15);
-		  printf("read lfs %s \n", lb);
-		  HAL_Delay(50);
-  }
+//  Storage_t * _storage = get_storage_instance();
+//  if(_storage == NULL)
+//  {
+//	  printf("local storage instance null \n "); while(1);
+//  }
+//  char lb[48];
+//  for(int i=0 ; i<28; i++)
+//  {
+//  		  memset(lb, 0, sizeof(lb));
+////  		  itoa(i, lb, 10);
+////  		  strcat(lb, " : location data \n") ;
+////  		 _storage->push(lb, 19);
+//		  _storage->pop(lb, 15);
+//		  printf("read lfs %s \n", lb);
+//		  HAL_Delay(50);
+//  }
 
   Info_firmware_t _firmware ;
   err = get_firmware_info(&_firmware);
@@ -148,6 +149,37 @@ int main(void)
 
   printf("firmware local dir : %s \n", _firmware.local_firmwre_dir);
 
+  //_firmware.remove();
+
+
+  int p = 8 ;
+  int x = 43/p ;
+  char my_temp_buff[8];
+  for(int i=0; i<=x; i++)
+  {
+	  memset(my_temp_buff, 0, 8);
+	  if((43-x*i) < 8)
+	  {
+		  p = 43-x*i ;
+	  }
+	  memcpy(my_temp_buff, &file_to_write_test[i*p], p);
+	  printf("main:to write %s \n", my_temp_buff);
+	  _firmware.write((uint8_t *)my_temp_buff, p);
+  }
+
+  p=8 ;
+  for(int i=0; i<=x; i++)
+  {
+	  int seek = i*p ;
+	  if((43-x*i) < 8)
+	  {
+		  p = 43-x*i ;
+	  }
+	  memset(my_temp_buff, 0, 8);
+	  _firmware.read((uint8_t *)my_temp_buff, p, seek);
+	  printf("%s", my_temp_buff);
+  }
+  printf("\n");
   while (1)
   {
     /* USER CODE END WHILE */

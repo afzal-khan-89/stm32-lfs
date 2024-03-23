@@ -18,7 +18,8 @@ typedef enum{
 	STORAGE_WRITE_FAIL = -6,
 	STORAGE_READ_FAIL = -7,
 	STORAGE_DIR_FAIL = -8,
-	STORAGE_FLASH_ERROR = -9
+	STORAGE_REMOVE_FAIL = -9,
+	STORAGE_FLASH_ERROR = -10
 }Storage_error_t ;
 
 typedef struct{
@@ -27,8 +28,8 @@ typedef struct{
 	uint8_t version[16] ;
 	uint8_t remote_firmware_url[128];
 	uint8_t local_firmwre_dir[48];
-	int (*read)(uint8_t *, uint16_t , uint32_t);
-	int (*write)(uint8_t *, uint16_t , uint32_t);
+	int ( *read )( uint8_t *, uint16_t , uint32_t );
+	int ( *write )( uint8_t *, uint16_t );
 	Storage_error_t(*remove)();
 }Info_firmware_t;
 
@@ -50,3 +51,33 @@ extern uint8_t  set_firmware_info(Info_firmware_t * _firmware);
 
 
 #endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
